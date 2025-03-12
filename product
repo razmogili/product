@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .movie-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .movie-image {
+            flex: 1;
+            max-width: 300px;
+            text-align: center;
+        }
+        .movie-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .movie-details {
+            flex: 2;
+            padding-left: 20px;
+        }
+        .movie-details h2 {
+            font-size: 2.5em;
+            color: #333;
+        }
+        .movie-details p {
+            font-size: 1.2em;
+            color: #555;
+            line-height: 1.5;
+        }
+        .movie-details .release-date,
+        .movie-details .director {
+            font-weight: bold;
+        }
+        .buy-button {
+            background-color: #e76f51;
+            color: white;
+            padding: 15px 25px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .buy-button:hover {
+            background-color: #f4a261;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Movie Details</h1>
+
+    <div id="movie-container">
+        <!-- Movies will be loaded here dynamically -->
+    </div>
+
+    <script>
+        // Sample JSON Data for multiple movies
+        const movieData = {
+            "movies": [
+                {
+                    "title": "kalki 2898 AD",
+                    "description": "Centuries into the future, at the end of Kaliyuga, a prophecy reveals that the next Avatar shall be reborn. For whom an immortal warrior from the previous yuga must battle against the present government. And then he meets his biggest, most unlikely opponent.",
+                    "releaseDate": "2024-06-27",
+                    "director": "Naag Ashwin",
+                    "posterUrl": "https://via.placeholder.com/400x600.png?text=Inception+Poster",
+                    "buyLink": "https://www.amazon.com/dp/B003Z6XH6I"
+                },
+                {
+                    "title": "pushpa the rule",
+                    "description": "It follows Pushpa Raj, a labourer-turned-red sandalwood smuggler, as he faces growing threats from his enemies, including SP Bhanwar Singh Shekhawat.",
+                    "releaseDate": "2024-12-05",
+                    "director": "sukumar",
+                    "posterUrl": "https://via.placeholder.com/400x600.png?text=The+Dark+Knight+Poster",
+                    "buyLink": "https://www.amazon.com/dp/B001GZ6QFC"
+                },
+                {
+                    "title": "thandel",
+                    "description": "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
+                    "releaseDate": "2025-02-07",
+                    "director": "chandoo modeti",
+                    "posterUrl": "https://via.placeholder.com/400x600.png?text=Interstellar+Poster",
+                    "buyLink": "https://www.amazon.com/dp/B00P7X6ZZC"
+                },
+                {
+                    "title": "RRR",
+                    "description": "A fearless revolutionary and an officer in the British force, who once shared a deep bond, decide to join forces and chart out an inspirational path of freedom against the despotic rulers.",
+                    "releaseDate": "2022-03-24",
+                    "director": "maruthi",
+                    "posterUrl": "https://via.placeholder.com/400x600.png?text=The+Matrix+Poster",
+                    "buyLink": "https://www.amazon.com/dp/B00EG67OQW"
+                },
+                {
+                    "title": "dasara",
+                    "description": "In a town that is dependant on coal mining, The lives of three childhood friends turn chaotic when they get into a fight with the son of the village headman.",
+                    "releaseDate": "2023-03-30",
+                    "director": "srikanth odela",
+                    "posterUrl": "https://via.placeholder.com/400x600.png?text=The+Godfather+Poster",
+                    "buyLink": "https://www.amazon.com/dp/B0045Z8OH4"
+                }
+            ]
+        };
+
+        // Function to load movie details dynamically
+        function loadMovies(movieArray) {
+            const movieContainer = document.getElementById("movie-container");
+
+            movieArray.forEach(movie => {
+                const movieImage = document.createElement("div");
+                movieImage.classList.add("movie-image");
+                movieImage.innerHTML = `<img src="${movie.posterUrl}" alt="${movie.title} Poster">`;
+
+                const movieDetails = document.createElement("div");
+                movieDetails.classList.add("movie-details");
+                movieDetails.innerHTML = `
+                    <h2>${movie.title}</h2>
+                    <p class="description">${movie.description}</p>
+                    <p class="release-date">Release Date: ${movie.releaseDate}</p>
+                    <p class="director">Director: ${movie.director}</p>
+                    <a href="${movie.buyLink}" target="_blank">
+                        <button class="buy-button">Buy Now</button>
+                    </a>
+                `;
+
+                const movieDiv = document.createElement("div");
+                movieDiv.classList.add("movie-container");
+                movieDiv.appendChild(movieImage);
+                movieDiv.appendChild(movieDetails);
+
+                movieContainer.appendChild(movieDiv);
+            });
+        }
+
+        // Load the movie details when the page loads
+        window.onload = function() {
+            loadMovies(movieData.movies);
+        };
+    </script>
+
+</body>
+</html>
